@@ -1,16 +1,21 @@
+<%@page import="javafx.util.Pair"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="br.com.sourcecodeplataform.bean.Usuario"%>
 <%@page import="br.com.sourcecodeplataform.controler.ControleUsuario"%>
 
 <%
-    //public Usuario (int idp, String nomep,String loginp, String senhap, String statusp, String tipop
-    //
-    String login = request.getParameter("EMAIL");
-    String senha = request.getParameter("SENHA");
-    Usuario usu = new Usuario(0, login, senha);
+    String email = request.getParameter("EMAIL");
+    String pass = request.getParameter("SENHA");
+    Usuario usu = new Usuario(0, "", email, pass, "");
     ControleUsuario usucont = new ControleUsuario();
-    usu = usucont.validateUser(usu);
-    session.setAttribute("UsuarioLogado",usu);
+    boolean successfullyLogged;
+
+    Pair<Usuario, Boolean> result = usucont.validateUser(usu);
+    
+    usu = (Usuario) result.getKey();
+    successfullyLogged = (boolean) result.getValue();
+    if (successfullyLogged)
+        session.setAttribute("UsuarioLogado", usu);
 %>
 
 <!DOCTYPE html>
@@ -18,116 +23,48 @@
     <%@include file="../../inc/materalizeWeb.inc" %>
     <title>SISTEMA </title>
     <body>
-        <% if (!usu.getStatus().equals("")) { %>
+        <% if (successfullyLogged) { /*tava usu.getStatus().equals(""), provavelmeente devo colocar algo para ver se a senha e login conferem*/ %>
             <!-- Dropdown1 Trigger -->
             <a class='dropdown-button btn' data-beloworigin="true" href='#' data-activates='dropdown1'>Manter Controle de Usuario</a>        
-            <a class='dropdown-button btn' data-beloworigin="true" href='#' data-activates='dropdown2'>Manter Controle de Usuario & Pessoa</a>        
-            <a class='dropdown-button btn' data-beloworigin="true" href='#' data-activates='dropdown3'>Manter Controle de Pessoa</a>        
-            <a class='dropdown-button btn' data-beloworigin="true" href='#' data-activates='dropdown4'>Manter Controle de Dependente</a>        
-            <a class='dropdown-button btn' data-beloworigin="true" href='#' data-activates='dropdown5'>Manter Controle de Funcionario & Dependente</a>        
-            <a class='dropdown-button btn' data-beloworigin="true" href='#' data-activates='dropdown6'>Manter Controle de Funcionario</a>        
-            <a class='dropdown-button btn' data-beloworigin="true" href='#' data-activates='dropdown7'>Manter Controle de Logradouro</a>        
-            <a class='dropdown-button btn' data-beloworigin="true" href='#' data-activates='dropdown8'>Manter Controle de Logradouro & Pessoa</a>        
+            <a class='dropdown-button btn' data-beloworigin="true" href='#' data-activates='dropdown2'>Manter Controle de Usuario & Projeto</a>        
+            <a class='dropdown-button btn' data-beloworigin="true" href='#' data-activates='dropdown3'>Manter Controle de Projeto</a>
 
             <% if (usu.getType().equals("ADM")) { %>
-                <!-- Dropdown1 Structure -->
                 <ul id='dropdown1' class='dropdown-content'>
-                    <li><a href="../usuario/inserirUsuario.jsp"> InseriUsuario </a></li>
-                    <li><a href="../usuario/consultarUsuario.jsp"> ConsultaUsuarioParametro </a></li>
+                    <li><a href="../usuario/inserirUsuario.jsp"> Inserir Usuario </a></li>
+                    <li><a href="../usuario/consultarUsuario.jsp"> Consultar Usuario </a></li>
                 </ul>
             <% } else { %>
                 <ul id='dropdown1' class='dropdown-content'>
-                    <li><a href="../usuario/consultarUsuario.jsp"> ConsultaUsuarioParametro </a></li>
+                    <li><a href="../usuario/consultarUsuario.jsp"> Consultar Usuario </a></li>
                 </ul>
             <% } %>
 
             <% if (usu.getType().equals("ADM")) { %>
-                <!-- Dropdown2 Structure -->
                 <ul id='dropdown2' class='dropdown-content'>
-                    <li><a href="../usupes/inserirRelacaoUsuarioPessoa.jsp"> InseriUsuarioPessoa </a></li>
-                    <li><a href="../usupes/consultarRelacaoUsuarioPessoa.jsp"> ConsultaUsuarioPessoa </a></li>
+                    <li><a href="../usuproj/inserirRelacaoUsuarioProjeto.jsp"> Inserir UsuarioProjeto </a></li>
+                    <li><a href="../usuproj/consultarRelacaoUsuarioProjeto.jsp"> Consultar UsuarioProjeto </a></li>
                 </ul>
             <% } else { %>
                 <ul id='dropdown2' class='dropdown-content'>
-                    <li><a href="../usupes/consultarRelacaoUsuarioPessoa.jsp"> ConsultaUsuarioPessoa </a></li>
+                    <li><a href="../usuproj/consultarRelacaoUsuarioProjeto.jsp"> Consultar UsuarioProjeto </a></li>
                 </ul>
             <% } %>
 
             <% if (usu.getType().equals("ADM")) { %>
-                <!-- Dropdown1 Structure -->
                 <ul id='dropdown3' class='dropdown-content'>
-                    <li><a href="../pessoa/inserirPessoa.jsp"> InseriPessoa </a></li>
-                    <li><a href="../pessoa/consultarPessoa.jsp"> ConsultaPessoa </a></li>
+                    <li><a href="../projeto/inserirProjeto.jsp"> Inserir Projeto </a></li>
+                    <li><a href="../projeto/consultarProjeto.jsp"> Consultar Projeto </a></li>
                 </ul>
             <% } else { %>
                 <ul id='dropdown3' class='dropdown-content'>
-                    <li><a href="../pessoa/consultarPessoa.jsp"> ConsultaPessoa </a></li>
+                    <li><a href="../projeto/consultarProjeto.jsp"> Consultar Projeto </a></li>
                 </ul>
             <% } %>
-
-            <% if (usu.getType().equals("ADM")) { %>
-                <!-- Dropdown1 Structure -->
-                <ul id='dropdown4' class='dropdown-content'>
-                    <li><a href="../depend/inserirDependente.jsp"> InseriDependente </a></li>
-                    <li><a href="../depend/consultarDependente.jsp"> ConsultaDependente </a></li>
-                </ul>
-            <% } else { %>
-                <ul id='dropdown4' class='dropdown-content'>
-                    <li><a href="../depend/consultarDependente.jsp"> ConsultaDependente </a></li>
-                </ul>
-            <% } %>
-            
-            <% if (usu.getType().equals("ADM")) { %>
-                <!-- Dropdown1 Structure -->
-                <ul id='dropdown5' class='dropdown-content'>
-                    <li><a href="../fundep/inserirRelacaoFunDep.jsp"> InseriFuncinarioDependente </a></li>
-                    <li><a href="../fundep/consultarRelacaoFunDep.jsp"> ConsultaFuncinarioDependente </a></li>
-                </ul>
-            <% } else { %>
-                <ul id='dropdown5' class='dropdown-content'>
-                    <li><a href="../fundep/consultarRelacaoFunDep.jsp"> ConsultaFuncinarioDependente </a></li>
-                </ul>
-            <% } %>
-         
-           <% if (usu.getType().equals("ADM")) { %>
-                <!-- Dropdown1 Structure -->
-                <ul id='dropdown6' class='dropdown-content'>
-                    <li><a href="../funcio/inserirFuncionario.jsp"> InseriFuncinario</a></li>
-                    <li><a href="../funcio/consultarFuncionario.jsp"> ConsultaFuncinario</a></li>
-                </ul>
-            <% } else { %>
-                <ul id='dropdown6' class='dropdown-content'>
-                    <li><a href="../funcio/consultarFuncionario.jsp"> ConsultaFuncionario</a></li>
-                </ul>
-            <% } %>
-
-           <% if (usu.getType().equals("ADM")) { %>
-                <!-- Dropdown1 Structure -->
-                <ul id='dropdown7' class='dropdown-content'>
-                    <li><a href="../lograd/inserirLogradouro.jsp"> InseriLogradouro</a></li>
-                    <li><a href="../lograd/consultarLogradouro.jsp"> ConsultaLogradouro</a></li>
-                </ul>
-            <% } else { %>
-                <ul id='dropdown7' class='dropdown-content'>
-                    <li><a href="../lograd/consultarLogradouro.jsp"> ConsultaLogradouro</a></li>
-                </ul>
-            <% } %>
-
-            <% if (usu.getType().equals("ADM")) { %>
-                <!-- Dropdown1 Structure -->
-                <ul id='dropdown8' class='dropdown-content'>
-                    <li><a href="../peslog/inserirRelacaoPeslog.jsp"> Inseri Pessoa & Logradouro</a></li>
-                    <li><a href="../peslog/consultarRelacaoPeslog.jsp"> Consulta Pessoa & Logradouro</a></li>
-                </ul>
-            <% } else { %>
-                <ul id='dropdown8' class='dropdown-content'>
-                    <li><a href="../peslog/consultarRelacaoPeslog.jsp"> Consulta Pessoa & Logradouro</a></li>
-                </ul>
-            <% } %>
-
             
         <% } else { %>
                 <h1>USUÁRIO INVÁLIDO</h1>
+                <p>Verifique se você digitou a senha corretamente<p>
         <% } %>
     </body>
 </html>

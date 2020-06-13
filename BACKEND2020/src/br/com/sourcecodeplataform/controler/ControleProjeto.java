@@ -29,10 +29,18 @@ public class ControleProjeto {
         return dao.exclui(pro);
     }
 
+    public Projeto buscarProjeto(Projeto pes) throws SQLException, ClassNotFoundException {
+        DaoProjeto d = new DaoProjeto();
+        return d.busca(pes);
+    }
+
     public List<Projeto> listProjeto (Projeto pro) throws SQLException, ClassNotFoundException {
-        List<Projeto> list;
         dao = new DaoProjeto();
-        list = dao.lista(pro);
-        return list;
+        return dao.lista(pro);
+    }
+    
+    public List<Projeto> listAllProjetos () throws SQLException, ClassNotFoundException {
+        dao = new DaoProjeto();
+        return dao.listaTodos();
     }
 }

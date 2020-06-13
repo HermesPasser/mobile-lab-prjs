@@ -4,22 +4,25 @@ import br.com.sourcecodeplataform.bean.Usuario;
 import br.com.sourcecodeplataform.dao.DaoUsuario;
 import java.sql.SQLException;
 import java.util.List;
+import javafx.util.Pair;
 
 public class ControleUsuario {
     
     public static DaoUsuario dao;
     
-    // peguei do outro, arrumar para funfar
-     public List<Usuario> listarUsuario(Usuario usu) throws SQLException, ClassNotFoundException {
-        List<Usuario>  usus ;
+     public List<Usuario> listUser(Usuario usu) throws SQLException, ClassNotFoundException {
         DaoUsuario usuDao = new DaoUsuario();
-        usus = usuDao.lista(usu);
-        return usus;
+        return usuDao.lista(usu);
     }
      
-    public List<Usuario> listUsers() throws SQLException, ClassNotFoundException {
+    public List<Usuario> listAllUsers() throws SQLException, ClassNotFoundException {
         DaoUsuario udao = new DaoUsuario();
         return udao.listaTodos();
+    }
+    
+    public Usuario excluirUsuario(Usuario usu) throws SQLException, ClassNotFoundException {
+        DaoUsuario usuDao = new DaoUsuario();
+        return usuDao.exclui(usu);
     }
     
     public Usuario alterarUsuario(Usuario usu) throws SQLException, ClassNotFoundException {
@@ -33,9 +36,17 @@ public class ControleUsuario {
         return dao.busca(u);
     }
     
-       public Usuario validateUser(Usuario usu) throws SQLException, ClassNotFoundException {
+    public Usuario insertUser(Usuario usu) throws SQLException, ClassNotFoundException {
+       DaoUsuario usuDao = new DaoUsuario();
+       return usuDao.inseri(usu);
+    }
+    /**
+    * Validates the user 
+    * @return a pair with the evaluated Usuário and a boolean
+    * that is true if the validation was successfully
+    */
+    public Pair<Usuario, Boolean> validateUser(Usuario usu) throws SQLException, ClassNotFoundException {
         DaoUsuario usuDao = new DaoUsuario();
-        usu = usuDao.validateUser(usu);
-        return usu;
+        return usuDao.validateUser(usu);
     }
 }

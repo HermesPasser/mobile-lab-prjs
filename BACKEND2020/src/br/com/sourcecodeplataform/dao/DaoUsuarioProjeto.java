@@ -41,7 +41,7 @@ public class DaoUsuarioProjeto {
 
 
     public UsuarioProjeto inseri(UsuarioProjeto up) throws SQLException{
-        String sql = "insert into usuarios_projetos" + " (idPessoa, idUsuario)" + " values (?,?)";
+        String sql = "insert into usuarios_projetos (idUsuario, idProjeto) values (?, ?)";
         PreparedStatement stmt = c.prepareStatement(sql);
         stmt.setInt(1, up.getUsuarioId());
         stmt.setInt(2, up.getProjetoId());

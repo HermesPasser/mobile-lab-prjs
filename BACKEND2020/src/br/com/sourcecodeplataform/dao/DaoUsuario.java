@@ -6,8 +6,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.util.Pair;
 
 public class DaoUsuario {
     
@@ -39,12 +41,20 @@ public class DaoUsuario {
         return usuarios;     
     }
     
-    // peguei do outro, arrumar para funfar
+    public Usuario exclui(Usuario usu) throws SQLException{
+        String sql = "delete from usuarios WHERE id = ?";
+        PreparedStatement stmt = c.prepareStatement(sql);
+        stmt.setInt(1, usu.getId());
+        stmt.execute();
+        stmt.close();
+        return usu;
+    }
+    
     public List<Usuario> lista(Usuario usuEnt) throws SQLException{
         List<Usuario> usus = new ArrayList<>();
-        String sql = "select * from usuarios where email like ?";
+        String sql = "select * from usuarios where name like ?";
         PreparedStatement stmt = this.c.prepareStatement(sql);
-        stmt.setString(1, "%" + usuEnt.getEmail() + "%");
+        stmt.setString(1, "%" + usuEnt.getName() + "%");
         
         ResultSet rs = stmt.executeQuery();
         
@@ -61,8 +71,45 @@ public class DaoUsuario {
         
         rs.close();
         stmt.close();
-        return usus;
+        return usus;     
+    }
+    
+    public Usuario altera(Usuario usu) throws SQLException{
+        String sql = "UPDATE usuarios SET "
+                + "name = ?, email = ?, password = ?, type = ? WHERE id = ?";
+        PreparedStatement stmt = c.prepareStatement(sql);
+
+        stmt.setString(1, usu.getName());
+        stmt.setString(2, usu.getEmail());
+        stmt.setString(3, usu.getPassword());
+        stmt.setString(4, usu.getType());
+        stmt.setInt(5, usu.getId());
+
+        stmt.execute();
+        stmt.close();
+        return usu;
+    }
+    
+    public Usuario inseri(Usuario usu) throws SQLException{
+        String sql = "insert into usuarios (name, email, password, type)  values (?,?,?,?)";
+        PreparedStatement stmt = c.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+        stmt.setString(1, usu.getName());
+        stmt.setString(2, usu.getEmail());
+        stmt.setString(3, usu.getPassword());
+        stmt.setString(4, usu.getType());
+
+        stmt.executeUpdate();
+        ResultSet rs = stmt.getGeneratedKeys();
         
+        if (rs.next()) {
+            int id = rs.getInt(1);
+            usu.setId(id);
+        }
+        
+        rs.close();
+        stmt.close();
+        return usu;
     }
     
     public Usuario busca(Usuario user) throws SQLException{
@@ -84,23 +131,28 @@ public class DaoUsuario {
         return user;
     } 
     
-    public Usuario validateUser(Usuario usu) throws SQLException{
+    public Pair<Usuario, Boolean> validateUser(Usuario usu) throws SQLException{
         String sql = "select * from usuarios WHERE email = ? AND password = ?";
         PreparedStatement stmt = this.c.prepareStatement(sql);
         stmt.setString(1, usu.getEmail());
         stmt.setString(2, usu.getPassword());
         ResultSet rs = stmt.executeQuery();
-        while (rs.next()) {      
-            usu.setId(rs.getInt(1));
-            usu.setName(rs.getString(2));
-            usu.setEmail(rs.getString(3));
-            usu.setPassword(rs.getString(4));
-            usu.setType(rs.getString(5));
-        }
+        boolean found = false;
         
+        if (rs.isBeforeFirst()) {
+            while (rs.next()) {      
+                usu.setId(rs.getInt(1));
+                usu.setName(rs.getString(2));
+                usu.setEmail(rs.getString(3));
+                usu.setPassword(rs.getString(4));
+                usu.setType(rs.getString(5));
+            }
+            found = true;
+        } 
+ 
         rs.close();
         stmt.close();
-        return usu;
+        return new Pair<>(usu, found);
     }
     
 }

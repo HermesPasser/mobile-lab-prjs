@@ -1,18 +1,15 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="br.com.fatec.bean.Usuario"%>
-<%@page import="br.com.fatec.controler.ControleUsuario"%>
+<%@page import="br.com.sourcecodeplataform.bean.Usuario"%>
+<%@page import="br.com.sourcecodeplataform.controler.ControleUsuario"%>
 
 <%
-    String nome = request.getParameter("NOME");
-    String login = request.getParameter("LOGIN");
-    String senha = request.getParameter("SENHA");
-    String status = request.getParameter("STATUS");
-    String tipo = request.getParameter("TIPO");
-    Usuario usu = new Usuario(0,login,nome,senha,status,tipo);
+    String name = request.getParameter("NOME");
+    String email = request.getParameter("LOGIN");
+    String pass = request.getParameter("SENHA");
+    String type = request.getParameter("TIPO");
+    Usuario usu = new Usuario(0, name, email, pass, type);
     ControleUsuario usucont = new ControleUsuario();
-    usu = usucont.inserirUsuario(usu);
+    usu = usucont.insertUser(usu);
 
-    // REDIRECIONA PARA A PAG LOGIN.JSP
-    String url = "inserirUsuario.jsp";
-    response.sendRedirect(url);
+    response.sendRedirect("inserirUsuario.jsp");
 %>

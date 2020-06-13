@@ -8,7 +8,6 @@
     String name = request.getParameter("NOME");
     String email = request.getParameter("LOGIN");
     String pass = request.getParameter("SENHA");
-    String status = request.getParameter("STATUS");
     String type = request.getParameter("TIPO");
     String pbusca = request.getParameter("PBUSCA");
 

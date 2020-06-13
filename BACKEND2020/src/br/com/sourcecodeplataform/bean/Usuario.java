@@ -6,22 +6,23 @@ public class Usuario {
     private String email;
     private String password;
     private String type;
-
+    
     public Usuario(int id) {
         this.id = id;
     }
     
-    public Usuario(int id, String email, String pass) {
+    public Usuario(int id, String name, String pass) {
         this.id = id;
-        this.email = email;
+        this.name = name;
         this.password = pass;
     }
 
-    public Usuario(int id, String name, String email, String pass, String tipo) {
+    public Usuario(int id, String name, String email, String pass, String type) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = pass;
+        this.type = type;
     }
     
     public String getPassword() {

@@ -44,24 +44,24 @@ public class UsuarioProjeto {
         this.projetoId = projetoId;
     }
 
-    public Usuario getU() {
+    public Usuario getUsuario() {
         return u;
     }
 
-    public void setU(Usuario u) {
+    public void setUsuario(Usuario u) {
         this.u = u;
     }
 
-    public Projeto getP() {
+    public Projeto getProjeto() {
         return p;
     }
 
-    public void setP(Projeto p) {
+    public void setProjeto(Projeto p) {
         this.p = p;
     }
 
     @Override
     public String toString() {
         return "UsuarioProjeto{" + "id=" + id + ", usuarioId=" + usuarioId + ", projetoId=" + projetoId + '}';
-    }
+    } 
 }

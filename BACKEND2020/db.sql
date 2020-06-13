@@ -4,8 +4,8 @@ create table sourcecodeplataform.usuarios (
   id BIGINT NOT NULL AUTO_INCREMENT,
   name VARCHAR(255) NOT NULL,
   email VARCHAR(100) NOT NULL UNIQUE,
-  senha VARCHAR(255) NOT NULL,
-  tipo VARCHAR(20) DEFAULT "normal",
+  password VARCHAR(255) NOT NULL,
+  type VARCHAR(20) DEFAULT "normal",
   primary key (id));
 
 create table sourcecodeplataform.projetos (
@@ -13,7 +13,7 @@ create table sourcecodeplataform.projetos (
   name VARCHAR(255) NOT NULL,
   description VARCHAR(255) NOT NULL,
   filepath VARCHAR(255) UNIQUE,
-  tipoScm VARCHAR(20) DEFAULT "git",
+  scmType VARCHAR(20) DEFAULT "git",
   primary key (id));
 
 create table sourcecodeplataform.usuarios_projetos (
@@ -29,13 +29,13 @@ ALTER TABLE sourcecodeplataform.usuarios_projetos
     ADD CONSTRAINT FK_PROJETO_USUARIO FOREIGN KEY (idProjeto) REFERENCES sourcecodeplataform.projetos (id);  
 
 
-INSERT INTO `sourcecodeplataform`.`usuarios` (`id`, `name`,  `email`, `senha`) 
+INSERT INTO `sourcecodeplataform`.`usuarios` (`id`, `name`,  `email`, `password`) 
     VALUES ('1', 'Bil Gates', 'bgates@mail.com', '1234');
 
-INSERT INTO `sourcecodeplataform`.`usuarios` (`id`, `name`,  `email`, `senha`) 
+INSERT INTO `sourcecodeplataform`.`usuarios` (`id`, `name`,  `email`, `password`) 
     VALUES ('2', 'Ken Thompson', 'thompson@mail.com', '3331');
     
-INSERT INTO `sourcecodeplataform`.`usuarios` ( `name`,  `email`, `senha`, `tipo`) 
+INSERT INTO `sourcecodeplataform`.`usuarios` ( `name`,  `email`, `password`, `type`) 
     VALUES ('douglas', 'douglas@gmail.com', '11', "ADM");
 
 
@@ -47,12 +47,12 @@ INSERT INTO `sourcecodeplataform`.`projetos` (`id`, `name`,  `description`, `fil
 
 
 
-INSERT INTO `sourcecodeplataform`.`usuarios_projetos` (`id`, `idUsuario`,  `idProjeto`) 
-    VALUES ('1', '1', '2');
+INSERT INTO `sourcecodeplataform`.`usuarios_projetos` (`idUsuario`,  `idProjeto`) 
+    VALUES ( '1', '2');
 
-INSERT INTO `sourcecodeplataform`.`usuarios_projetos` (`id`, `idUsuario`,  `idProjeto`) 
-    VALUES ('2', '2', '1');
-
+INSERT INTO `sourcecodeplataform`.`usuarios_projetos` (`idUsuario`,  `idProjeto`) 
+    VALUES ('2', '1');
+    
 
 SELECT up.id 'ID', pr.name 'PROJETO', pr.description 'DESCRIPTION', us.name 'AUTHOR', pr.filepath 'PATH'
 	FROM sourcecodeplataform.usuarios us, sourcecodeplataform.projetos pr, sourcecodeplataform.usuarios_projetos up

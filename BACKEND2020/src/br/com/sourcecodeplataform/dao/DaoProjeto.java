@@ -18,6 +18,52 @@ public class DaoProjeto {
         this.c = new ConexaoDB().getConnection();
     }
     
+    public List<Projeto> listaTodos() throws SQLException{
+        List<Projeto> prs = new ArrayList<>();    
+        String sql = "select * from projetos";  
+        PreparedStatement stmt = this.c.prepareStatement(sql);
+        ResultSet rs = stmt.executeQuery();
+        
+        while (rs.next()) {      
+            Projeto pr = new Projeto(
+                rs.getInt(1),
+                rs.getString(2),
+                rs.getString(3),
+                rs.getString(4),
+                rs.getString(5)
+            );
+            prs.add(pr);
+        }
+        
+        rs.close();
+        stmt.close();
+        return prs;
+    }
+    
+    public List<Projeto> lista(Projeto pr) throws SQLException{
+        List<Projeto> prs = new ArrayList<>();
+        String sql = "select * from projetos where name like ?";
+        PreparedStatement stmt = this.c.prepareStatement(sql);
+        
+        stmt.setString(1, "%" + pr.getName() + "%");
+        ResultSet rs = stmt.executeQuery();
+        
+        while (rs.next()) {      
+            Projeto p = new Projeto(
+                rs.getInt(1),
+                rs.getString(2),
+                rs.getString(3),
+                rs.getString(4),
+                rs.getString(5)
+            );
+            prs.add(p);
+        }
+        
+        rs.close();
+        stmt.close();
+        return prs;    
+    }
+    
     public Projeto busca(Projeto proj) throws SQLException{
         String sql = "select * from projetos WHERE id = ?";
         PreparedStatement stmt = this.c.prepareStatement(sql);
@@ -81,22 +127,5 @@ public class DaoProjeto {
         rs.close();
         c.close();
         return proj;
-    }
-
-    public List<Projeto> lista(Projeto projEnt) throws SQLException{
-        List<Projeto> projs = new ArrayList<>();     
-        String sql = "select * from projetos where name like ?";
-        PreparedStatement stmt = this.c.prepareStatement(sql);
-        stmt.setString(1, "%" + projEnt.getName() + "%");       
-        ResultSet rs = stmt.executeQuery();
-        
-        while (rs.next()) {      
-            Projeto proj = new Projeto(rs.getInt(1),rs.getString(2),rs.getString(3), rs.getString(4));
-            projs.add(proj);
-        }
-        stmt.close();
-        rs.close();
-        c.close();
-        return projs;   
     }
 }

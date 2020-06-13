@@ -11,11 +11,12 @@ public class Projeto {
         this.id = id;
     }
 
-    public Projeto(int id, String name, String desc, String filename) {
+    public Projeto(int id, String name, String desc, String filename, String scm) {
         this.id = id;
         this.name = name;
         this.description = desc;
         this.archiveFilename = filename;
+        this.scmType = scm;
     }
           
     public int getId() {
