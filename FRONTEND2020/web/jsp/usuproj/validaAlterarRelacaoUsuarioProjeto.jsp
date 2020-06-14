@@ -3,12 +3,13 @@
 <%@page import="br.com.sourcecodeplataform.controler.ControleUsuarioProjeto"%>
 
 <%
-    String cod = request.getParameter("ID");
-    int id = Integer.parseInt(cod);
+    int id = Integer.parseInt(request.getParameter("ID"));
     int idUsuario = Integer.parseInt(request.getParameter("ID_USUARIO"));
     int idProjeto = Integer.parseInt(request.getParameter("ID_PROJETO"));
+    boolean isOwner = request.getParameter("PROPRIETARIO") == null ? false : true;
+
     String pbusca = request.getParameter("PBUSCA");
-    UsuarioProjeto usuProj = new UsuarioProjeto(id, idUsuario, idProjeto);
+    UsuarioProjeto usuProj = new UsuarioProjeto(id, idUsuario, idProjeto, isOwner);
     ControleUsuarioProjeto controler = new ControleUsuarioProjeto();
     usuProj = controler.alterarUsuarioProjeto(usuProj);
 

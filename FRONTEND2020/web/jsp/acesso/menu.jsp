@@ -65,6 +65,9 @@
         <% } else { %>
                 <h1>USUÁRIO INVÁLIDO</h1>
                 <p>Verifique se você digitou a senha corretamente<p>
+                <form name="sendsYouBack" action="login.jsp" method="post">
+                    <input type="submit" value="Voltar">
+                </form>
         <% } %>
     </body>
 </html>

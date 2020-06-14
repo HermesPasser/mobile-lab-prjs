@@ -38,6 +38,7 @@ public class DaoUsuario {
         
         rs.close();
         stmt.close();
+        c.close();
         return usuarios;     
     }
     
@@ -47,6 +48,7 @@ public class DaoUsuario {
         stmt.setInt(1, usu.getId());
         stmt.execute();
         stmt.close();
+        c.close();
         return usu;
     }
     
@@ -71,6 +73,7 @@ public class DaoUsuario {
         
         rs.close();
         stmt.close();
+        c.close();
         return usus;     
     }
     
@@ -87,6 +90,7 @@ public class DaoUsuario {
 
         stmt.execute();
         stmt.close();
+        c.close();
         return usu;
     }
     
@@ -109,6 +113,7 @@ public class DaoUsuario {
         
         rs.close();
         stmt.close();
+        c.close();
         return usu;
     }
     
@@ -128,6 +133,7 @@ public class DaoUsuario {
         }
         rs.close();
         stmt.close();
+        c.close();
         return user;
     } 
     
@@ -152,6 +158,7 @@ public class DaoUsuario {
  
         rs.close();
         stmt.close();
+        c.close();
         return new Pair<>(usu, found);
     }
     

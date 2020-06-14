@@ -5,8 +5,9 @@
 <%
     int idUsuario = Integer.parseInt(request.getParameter("ID_USUARIO"));
     int idProjeto = Integer.parseInt(request.getParameter("ID_PROJETO"));
+    boolean isOwner = request.getParameter("PROPRIETARIO") == null ? false : true;;
     
-    UsuarioProjeto up = new UsuarioProjeto(0, idUsuario, idProjeto);
+    UsuarioProjeto up = new UsuarioProjeto(0, idUsuario, idProjeto, isOwner);
     ControleUsuarioProjeto usupescont = new ControleUsuarioProjeto();
     up = usupescont.inserirUsuarioProjeto(up);
     

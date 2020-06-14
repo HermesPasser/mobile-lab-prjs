@@ -14,18 +14,15 @@
     ControleProjeto pesCont = new ControleProjeto();
     List<Projeto> projects = pesCont.listAllProjetos();
 
-    String cod = request.getParameter("ID");
-    int id = Integer.parseInt(cod);
+    int id = Integer.parseInt(request.getParameter("ID"));
+    
     UsuarioProjeto usuProj = new UsuarioProjeto(id);
-    ControleUsuarioProjeto contUsuProj = new ControleUsuarioProjeto();
-    usuProj = contUsuProj.buscarUsuarioProjeto(usuProj);
+    usuProj = new ControleUsuarioProjeto().buscarUsuarioProjeto(usuProj);
     String pbusca = request.getParameter("PBUSCA");
-
-
 %>
 
 <html>
-    <%@include file="../../inc/materalizeWeb.inc" %>
+    <!-- %@include file="../../inc/materalizeWeb.inc" % -->
     <title>ALTERAR - USUÁRIO PROJETO</title>
     <body>
        <div class="container"/>
@@ -61,6 +58,11 @@
                         </td>
                     </tr>
                 </table>    
+                 <input type="checkbox" name ="PROPRIETARIO" 
+                         <% if(usuProj.itIsOwner() ) { %>
+                            checked
+                        <% } %>
+                 />
             <input type="HIDDEN" name="ID" value="<%=usuProj.getId()%>"> <br>
             <input type="HIDDEN" name="PBUSCA" value="<%=pbusca%>">
             <input type="submit" name="Enviar" value="OK">

@@ -18,6 +18,14 @@ public class ControleUsuarioProjeto {
         return d.inseri(up);
     }
 
+    public boolean usuarioHasNoProjetos(Usuario u) throws SQLException, ClassNotFoundException {
+        return new DaoUsuarioProjeto().usuarioHasNoProjetos(u);
+    }
+    
+    public boolean projetoIsOwnedByNoUsuarios(Projeto p) throws SQLException, ClassNotFoundException {
+        return new DaoUsuarioProjeto().projetoIsOwnedByNoUsuarios(p);
+    }
+    
     public UsuarioProjeto buscaUsuarioProjetoPorId (UsuarioProjeto up) throws SQLException, ClassNotFoundException {
         daoUsuarioProjeto = new DaoUsuarioProjeto();
         
@@ -48,8 +56,8 @@ public class ControleUsuarioProjeto {
     }
 
     public List<UsuarioProjeto> listarUsuarioProjeto(UsuarioProjeto usuarioProjeto) throws SQLException, ClassNotFoundException {
-        DaoUsuarioProjeto usupesDao = new DaoUsuarioProjeto();
-        List<UsuarioProjeto> usuarioProjetos = usupesDao.lista(usuarioProjeto);
+        DaoUsuarioProjeto upDao = new DaoUsuarioProjeto();
+        List<UsuarioProjeto> usuarioProjetos = upDao.lista(usuarioProjeto);
 
         for (UsuarioProjeto usuPrj : usuarioProjetos) {
             Usuario usu = new Usuario(usuPrj.getUsuarioId());

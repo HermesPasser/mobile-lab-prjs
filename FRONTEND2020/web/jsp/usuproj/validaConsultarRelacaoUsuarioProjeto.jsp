@@ -5,16 +5,12 @@
 <%@page import="br.com.sourcecodeplataform.controler.ControleUsuarioProjeto"%>
 
 <%
-    int idUsuario = Integer.parseInt(request.getParameter("ID_USUARIO"));
-    int idProjeto = Integer.parseInt(request.getParameter("ID_PROJETO"));
-    
-    UsuarioProjeto usupes = new UsuarioProjeto(0, idUsuario, idProjeto);
-    ControleUsuarioProjeto usupescont = new ControleUsuarioProjeto();
-    List<UsuarioProjeto> usuarioProjetos = usupescont.listarUsuarioProjeto(usupes);
+    boolean isOwner = request.getParameter("PROPRIETARIO") == null ? false : true;
+    UsuarioProjeto up = new UsuarioProjeto(0, 0, 0, isOwner);
+    List<UsuarioProjeto> usuarioProjetos = new ControleUsuarioProjeto().listarUsuarioProjeto(up);
     Usuario loggedUser = (Usuario) session.getAttribute("UsuarioLogado");
     
-    // isso ta muito usando o obs, se não funfar adicionar isso obs na tabela
-    String url = "PBUSCA=&ID=" ; // String url = "PBUSCA=" + usupes.getObs() +"&ID=" ;
+    String url = "PBUSCA=" + up.itIsOwner() +"&ID=" ;
 %>
 
 <html>
@@ -29,6 +25,7 @@
                   <th data-field="NomeProjeto">NomeProjeto</th>
                   <th data-field="IdUsuario">IdUsuario</th>
                   <th data-field="NomeUsuario">NomeUsuario</th>
+                  <th data-field="Proprietario">É o proprietario do projeto</th>
                   <th data-field="Excluir">Excluir</th>
                   <th data-field="Alterar">Alterar</th>
               </tr>
@@ -42,6 +39,7 @@
                             <td><%=usuarioProjeto.getProjeto().getName()%></td>
                             <td><%=usuarioProjeto.getUsuarioId()%></td>
                             <td><%=usuarioProjeto.getUsuario().getName()%></td>
+                            <td><%=usuarioProjeto.itIsOwner()%></td>
                             <% if (loggedUser.getType().equals("ADM")) { %>
                                 <td><a href="excluirRelacaoUsuarioProjeto.jsp?<%=url + usuarioProjeto.getId()%>">Excluir</a></td>
                                 <td><a href="alterarRelacaoUsuarioProjeto.jsp?<%=url + usuarioProjeto.getId()%>">Alterar</a></td>
@@ -50,6 +48,6 @@
                     <% } %>
                 </tbody>
             <% } %>
-        </table>    
+        </table>   
     </body>
 </html>

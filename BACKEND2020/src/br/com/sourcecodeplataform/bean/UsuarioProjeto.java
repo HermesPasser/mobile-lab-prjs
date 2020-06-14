@@ -4,6 +4,7 @@ public class UsuarioProjeto {
     private int id;
     private int usuarioId;
     private int projetoId;
+    private boolean isOwner;
     
     private Usuario u;
     private Projeto p;
@@ -14,10 +15,11 @@ public class UsuarioProjeto {
         this.id = id;
     }
 
-    public UsuarioProjeto(int id, int usuarioId, int projetoId) {
+    public UsuarioProjeto(int id, int usuarioId, int projetoId, boolean isOwner) {
         this.id = id;
         this.usuarioId = usuarioId;
         this.projetoId = projetoId;
+        this.isOwner = isOwner;
     }
 
     public int getId() {
@@ -60,8 +62,16 @@ public class UsuarioProjeto {
         this.p = p;
     }
 
+    public boolean itIsOwner() {
+        return isOwner;
+    }
+
+    public void setIsOwner(boolean isOwner) {
+        this.isOwner = isOwner;
+    }
+
     @Override
     public String toString() {
-        return "UsuarioProjeto{" + "id=" + id + ", usuarioId=" + usuarioId + ", projetoId=" + projetoId + '}';
-    } 
+        return "UsuarioProjeto{" + "id=" + id + ", usuarioId=" + usuarioId + ", projetoId=" + projetoId + ", isOwner=" + isOwner + '}';
+    }
 }

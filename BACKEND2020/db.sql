@@ -20,6 +20,7 @@ create table sourcecodeplataform.usuarios_projetos (
   id BIGINT NOT NULL AUTO_INCREMENT,
   idUsuario BIGINT NOT NULL, 
   idProjeto BIGINT NOT NULL,
+  isOwner BOOL DEFAULT false,
   primary key (id));
   
 ALTER TABLE sourcecodeplataform.usuarios_projetos 

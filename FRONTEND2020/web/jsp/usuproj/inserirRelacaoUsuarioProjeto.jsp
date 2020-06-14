@@ -15,7 +15,7 @@
 %>
 
 <html>
-    <%@include file="../../inc/materalizeWeb.inc" %>
+    <!-- %@include file="../../inc/materalizeWeb.inc" % -->
     <title>INSERIR USUARIO PROJETO</title>
     <body>
         <div class="container"/>
@@ -42,7 +42,9 @@
                             </select> 
                         </td>
                     </tr>
-                </table>    
+                </table>  
+                È o dono do projeto: 
+                    <input type="checkbox" name="PROPRIETARIO" id="check" checked>
                 <input type="submit" name="Enviar" value="Enviar">  <br>
             </form>
         </div>                     

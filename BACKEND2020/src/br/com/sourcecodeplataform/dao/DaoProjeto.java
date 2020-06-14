@@ -37,6 +37,7 @@ public class DaoProjeto {
         
         rs.close();
         stmt.close();
+        c.close();
         return prs;
     }
     
@@ -61,6 +62,7 @@ public class DaoProjeto {
         
         rs.close();
         stmt.close();
+        c.close();
         return prs;    
     }
     
