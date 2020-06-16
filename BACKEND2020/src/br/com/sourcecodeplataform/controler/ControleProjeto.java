@@ -43,4 +43,13 @@ public class ControleProjeto {
         dao = new DaoProjeto();
         return dao.listaTodos();
     }
+       
+    public void deleteAll() throws SQLException, ClassNotFoundException {
+       new DaoProjeto().deleteAll();
+    }
+    
+    // Conta o número de items na tabela para saber se o apagarusuario apagou mesmo
+    public int contRows() throws SQLException, ClassNotFoundException {
+        return new DaoProjeto().countRows();
+    }
 }

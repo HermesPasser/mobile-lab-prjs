@@ -1,0 +1,6 @@
+Do jeito que programei, a tela de login bloqueia quem digitar
+email/senha errados então deixarei aqui duas contas que serão
+criadas pelo script de criação 'db.sql'
+
+Conta administradora: 	douglas@gmail.com | senha 111
+Conta normal: 		bgates@mail.com	  | senha 1234

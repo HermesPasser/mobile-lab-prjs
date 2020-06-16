@@ -78,5 +78,12 @@ public class ControleUsuarioProjeto {
         DaoUsuarioProjeto d = new DaoUsuarioProjeto();
         return d.exclui(usuProj);
     }
+        
+    public void deleteAll() throws SQLException, ClassNotFoundException {
+       new DaoUsuarioProjeto().deleteAll();
+    }
     
+    public int contRows() throws SQLException, ClassNotFoundException {
+        return new DaoUsuarioProjeto().countRows();
+    }
 }

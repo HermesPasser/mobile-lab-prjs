@@ -40,6 +40,16 @@ public class ControleUsuario {
        DaoUsuario usuDao = new DaoUsuario();
        return usuDao.inseri(usu);
     }
+    
+    public void deleteAll() throws SQLException, ClassNotFoundException {
+       new DaoUsuario().deleteAll();
+    }
+    
+    // Conta o número de items na tabela para saber se o apagarusuario apagou mesmo
+    public int contRows() throws SQLException, ClassNotFoundException {
+        return new DaoUsuario().countRows();
+    }
+    
     /**
     * Validates the user 
     * @return a pair with the evaluated Usuário and a boolean

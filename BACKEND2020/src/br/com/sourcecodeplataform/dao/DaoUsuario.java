@@ -137,6 +137,28 @@ public class DaoUsuario {
         return user;
     } 
     
+    public void deleteAll () throws SQLException{
+        String sql = "delete from usuarios";
+        PreparedStatement stmt = this.c.prepareStatement(sql);
+        stmt.executeUpdate();
+        stmt.close();
+        c.close();
+    }
+
+    public int countRows() throws SQLException{
+        String sql = "select * from usuarios ";
+        
+        PreparedStatement stmt = this.c.prepareStatement(sql);
+        ResultSet rs = stmt.executeQuery();
+        int i = 0;
+        while (rs.next()) i++;
+        
+        rs.close();
+        stmt.close();
+        c.close();
+        return i;
+    } 
+    
     public Pair<Usuario, Boolean> validateUser(Usuario usu) throws SQLException{
         String sql = "select * from usuarios WHERE email = ? AND password = ?";
         PreparedStatement stmt = this.c.prepareStatement(sql);
