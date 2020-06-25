@@ -92,7 +92,7 @@ public class DaoProjeto {
         stmt.setString(1, proj.getName());
         stmt.setString(2, proj.getDescription());
         stmt.setString(3, proj.getArchiveFilename());
-        stmt.setString(4, proj.getArchiveFilename());
+        stmt.setString(4, proj.getScmType());
         stmt.setInt(5, proj.getId());
         stmt.execute();
         stmt.close();
