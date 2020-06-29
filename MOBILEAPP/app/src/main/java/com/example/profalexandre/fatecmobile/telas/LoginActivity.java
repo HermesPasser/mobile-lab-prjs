@@ -7,35 +7,34 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.content.Intent;
 
-import com.example.profalexandre.fatecmobile.dbs.ControllerUsuario;
-import com.example.profalexandre.fatecmobile.modelos.UsuarioBean;
+import com.example.profalexandre.fatecmobile.dbs.UsuarioController;
+import com.example.profalexandre.fatecmobile.modelos.Usuario;
 import com.example.profalexandre.fatecmobile.R;
 
 public class LoginActivity extends AppCompatActivity {
-
-    EditText login,senha;
+    EditText email, password;
     Button addUsu, entrar;
-    String slogin;
-    String ssenha;
-    UsuarioBean usuEnt;
-    UsuarioBean usuSai;
+    String emailStr;
+    String passwStr;
+    Usuario usuEnt;
+    Usuario usuSai;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        final ControllerUsuario ge = new ControllerUsuario(getBaseContext());
+        final UsuarioController ge = new UsuarioController(getBaseContext());
 
-        login = (EditText) findViewById(R.id.login);
-        senha = (EditText) findViewById(R.id.senha);
+        email = (EditText) findViewById(R.id.email);
+        password = (EditText) findViewById(R.id.password);
 
-        slogin = login.getText().toString();
-        ssenha = senha.getText().toString();
+        emailStr = email.getText().toString();
+        passwStr = password.getText().toString();
 
-        usuEnt = new UsuarioBean();
-        usuEnt.setLogin(slogin);
-        usuEnt.setSenha(ssenha);
+        usuEnt = new Usuario(0);
+        usuEnt.setEmail(emailStr);
+        usuEnt.setPassword(passwStr);
 
         addUsu = (Button) findViewById(R.id.btnovousu);
         addUsu.setOnClickListener(new View.OnClickListener() {
@@ -50,10 +49,9 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 usuSai = ge.validarUsuarios(usuEnt);
                 Intent it = new Intent(LoginActivity.this, MenuActivity.class);
-                it.putExtra("UsuarioLogado",usuSai);
+                it.putExtra("UsuarioLogado", usuSai);
                 startActivity(it);
             }
         });
-
     }
 }

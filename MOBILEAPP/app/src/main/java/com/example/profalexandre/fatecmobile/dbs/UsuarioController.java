@@ -1,42 +1,36 @@
 package com.example.profalexandre.fatecmobile.dbs;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.example.profalexandre.fatecmobile.modelos.UsuarioBean;
+import com.example.profalexandre.fatecmobile.modelos.Usuario;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ControllerUsuario {
+public class UsuarioController {
 
     private static BancoHelper dbHelper = null;
     private static SQLiteDatabase db = null;
 
-    public ControllerUsuario(Context context) {
+    public UsuarioController(Context context) {
         if (dbHelper == null ) {
             dbHelper = new BancoHelper(context);
         }
     }
 
-    public String inserir(UsuarioBean usu) {
+    public String inserir(Usuario usu) {
         db = dbHelper.getWritableDatabase();
         ContentValues valores;
         long resultado;
         String retorno;
         valores = new ContentValues();
-        valores.put("LOGIN", usu.getLogin());
-        valores.put("SENHA", usu.getSenha());
-        valores.put("STATUS", usu.getStatus());
-        valores.put("TIPO", usu.getTipo());
+        valores.put("NAME", usu.getName());
+        valores.put("EMAIL", usu.getEmail());
+        valores.put("PASSWORD", usu.getPassword());
+        valores.put("TYPE", usu.getType());
         resultado = db.insert(BancoHelper.TABELA_U, null, valores);
         db.close();
 
@@ -48,7 +42,7 @@ public class ControllerUsuario {
         return retorno;
     }
 
-    public String excluir(UsuarioBean usu) {
+    public String excluir(Usuario usu) {
         String retorno = "Resgistro Excluir com Sucesso";
         String where = "ID = " + usu.getId();
         db = dbHelper.getReadableDatabase();
@@ -57,76 +51,74 @@ public class ControllerUsuario {
         return retorno;
     }
 
-    public String alterar(UsuarioBean usu) {
+    public String alterar(Usuario usu) {
         db = dbHelper.getWritableDatabase();
         ContentValues valores;
         String retorno = "Registro Alterado com sucesso";
         String where = "ID = " + usu.getId();
         valores = new ContentValues();
-        valores.put("LOGIN", usu.getLogin());
-        valores.put("SENHA", usu.getSenha());
-        valores.put("STATUS", usu.getStatus());
-        valores.put("TIPO", usu.getTipo());
+        valores.put("NAME", usu.getName());
+        valores.put("EMAIL", usu.getEmail());
+        valores.put("PASSWORD", usu.getPassword());
+        valores.put("TYPE", usu.getType());
         db.update(BancoHelper.TABELA_U, valores,where,null);
         db.close();
         return retorno;
     }
 
-    public List<UsuarioBean> listarUsuarios() {
-        List<UsuarioBean> usuarios = new ArrayList<UsuarioBean>();
+    public List<Usuario> listarUsuarios() {
+        List<Usuario> usuarios = new ArrayList<Usuario>();
         String selectQuery = "SELECT * FROM USUARIOS" ;
         db = dbHelper.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
         if (cursor.moveToFirst()) {
             do {
-                UsuarioBean usu = new UsuarioBean();
-                usu.setId(""+cursor.getInt(0));
-                usu.setLogin(cursor.getString(1));
-                usu.setSenha(cursor.getString(2));
-                usu.setStatus(cursor.getString(3));
-                usu.setTipo(cursor.getString(4));
+                Usuario usu = new Usuario(cursor.getInt(0));
+                usu.setName(cursor.getString(1));
+                usu.setEmail(cursor.getString(2));
+                usu.setPassword(cursor.getString(3));
+                usu.setType(cursor.getString(4));
                 usuarios.add(usu);
             } while (cursor.moveToNext());
         }
         return usuarios;
     }
 
-    public List<UsuarioBean> listarUsuarios(UsuarioBean usuEnt) {
-        List<UsuarioBean> usuarios = new ArrayList<UsuarioBean>();
-        String parametro = usuEnt.getLogin();
-        String selectQuery = "SELECT ID, LOGIN, SENHA, STATUS, TIPO FROM USUARIOS WHERE LOGIN LIKE ?" ;
+    public List<Usuario> listarUsuarios(Usuario usuEnt) {
+        List<Usuario> usuarios = new ArrayList<Usuario>();
+        String parametro = usuEnt.getEmail();
+        String selectQuery = "SELECT * FROM usuarios WHERE email LIKE ?";
         String[] whereArgs = new String[] { "%" + parametro + "%"  };
         db = dbHelper.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, whereArgs);
         if (cursor.moveToFirst()) {
             do {
-                UsuarioBean usu = new UsuarioBean();
-                usu.setId(""+cursor.getInt(0));
-                usu.setLogin(cursor.getString(1));
-                usu.setSenha(cursor.getString(2));
-                usu.setStatus(cursor.getString(3));
-                usu.setTipo(cursor.getString(4));
+                Usuario usu = new Usuario(cursor.getInt(0));
+                usu.setName(cursor.getString(1));
+                usu.setEmail(cursor.getString(2));
+                usu.setPassword(cursor.getString(3));
+                usu.setType(cursor.getString(4));
                 usuarios.add(usu);
             } while (cursor.moveToNext());
         }
         return usuarios;
     }
 
-    public UsuarioBean validarUsuarios(UsuarioBean usuEnt) {
-        UsuarioBean usu = new UsuarioBean();
-        String loginPar = '"' + usuEnt.getLogin().trim() + '"';
-        String senhaPar = '"' + usuEnt.getSenha().trim() + '"';
-        String selectQuery = "SELECT ID, LOGIN, SENHA, STATUS, TIPO FROM USUARIOS WHERE LOGIN = ? AND SENHA = ? " ;
+    public Usuario validarUsuarios(Usuario usuEnt) {
+        Usuario usu = new Usuario(0);
+        String loginPar = '"' + usuEnt.getEmail().trim() + '"';
+        String senhaPar = '"' + usuEnt.getPassword().trim() + '"';
+        String selectQuery = "SELECT * FROM usuarios WHERE email = ? AND password = ? " ;
         String[] whereArgs = new String [] {loginPar,senhaPar};
         db = dbHelper.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, whereArgs);
         if (cursor.moveToFirst()) {
             do {
-                usu.setId(""+cursor.getInt(0));
-                usu.setLogin(cursor.getString(1));
-                usu.setSenha(cursor.getString(2));
-                usu.setStatus(cursor.getString(3));
-                usu.setTipo(cursor.getString(4));
+                usu.setId(cursor.getInt(0));
+                usu.setName(cursor.getString(1));
+                usu.setEmail(cursor.getString(2));
+                usu.setPassword(cursor.getString(3));
+                usu.setType(cursor.getString(4));
             } while (cursor.moveToNext());
         }
         return usu;

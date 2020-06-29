@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:text="@string/lblogin"/>
     <EditText
-        android:id = "@+id/login"
+        android:id = "@+id/name"
         android:layout_width = "match_parent"
         android:layout_height = "wrap_content"
         android:inputType = "text" />
@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:text="@string/lbsenha"/>
     <EditText
-        android:id = "@+id/senha"
+        android:id = "@+id/email"
         android:layout_width = "match_parent"
         android:layout_height = "wrap_content"
         android:inputType = "textPassword" />
@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:text="@string/lbstatus"/>
     <EditText
-        android:id = "@+id/status"
+        android:id = "@+id/password"
         android:layout_width = "match_parent"
         android:layout_height = "wrap_content"
         android:inputType = "text" />
@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:text="@string/lbtipo"/>
     <EditText
-        android:id = "@+id/tipo"
+        android:id = "@+id/type"
         android:layout_width = "match_parent"
         android:layout_height = "wrap_content"
         android:inputType = "text" />

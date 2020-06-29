@@ -2,10 +2,7 @@ package com.example.profalexandre.fatecmobile.telas;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,10 +21,10 @@ public class UptUsuActivity extends AppCompatActivity {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_upt_usu);
             final ControllerUsuario ge = new ControllerUsuario(getBaseContext());
-            final EditText login = (EditText)findViewById(R.id.login);
-            final EditText senha = (EditText)findViewById((R.id.senha));
-            final EditText status = (EditText)findViewById(R.id.status);
-            final EditText tipo = (EditText)findViewById(R.id.tipo);
+            final EditText login = (EditText)findViewById(R.id.name);
+            final EditText senha = (EditText)findViewById((R.id.email));
+            final EditText status = (EditText)findViewById(R.id.password);
+            final EditText tipo = (EditText)findViewById(R.id.type);
             Intent it = getIntent();
             final UsuarioBean recuperado = (UsuarioBean) it.getSerializableExtra("Usuario");
             login.setText(recuperado.getLogin());
