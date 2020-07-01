@@ -1,4 +1,4 @@
-package com.example.profalexandre.fatecmobile.telas;
+package com.sourcecodeplataform.telas;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -7,11 +7,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.profalexandre.fatecmobile.R;
-import com.example.profalexandre.fatecmobile.dbs.UsuarioController;
-import com.example.profalexandre.fatecmobile.modelos.Usuario;
+import com.sourcecodeplataform.R;
+import com.sourcecodeplataform.dbs.UsuarioController;
+import com.sourcecodeplataform.modelos.Usuario;
 
-public class AddUsuActivity extends AppCompatActivity {
+public class AddPrActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -1,4 +1,4 @@
-package com.example.profalexandre.fatecmobile.modelos;
+package com.sourcecodeplataform.modelos;
 import java.io.Serializable;
 
 public class UsuarioProjeto implements Serializable {

@@ -30,4 +30,10 @@
         android:layout_height = "wrap_content"
         android:text = "@string/btnovousu" />
 
+    <Button
+        android:id = "@+id/btnovopr"
+        android:layout_width = "match_parent"
+        android:layout_height = "wrap_content"
+        android:text = "@string/btnovopr" />
+
 </LinearLayout>

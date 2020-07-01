@@ -1,4 +1,4 @@
-package com.example.profalexandre.fatecmobile.telas;
+package com.sourcecodeplataform.telas;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,12 +7,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.profalexandre.fatecmobile.R;
-import com.example.profalexandre.fatecmobile.modelos.Usuario;
+import com.sourcecodeplataform.R;
+import com.sourcecodeplataform.modelos.Usuario;
 
 public class MenuActivity extends AppCompatActivity {
-
-    Button addUsu, listUsu, listUsuPar;
+    Button addUsu, listUsu, listUsuPar, addPr;
     TextView textUsuLogado;
     Usuario usuLogado;
 
@@ -44,6 +43,15 @@ public class MenuActivity extends AppCompatActivity {
         addUsu.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent it = new Intent(MenuActivity.this, AddUsuActivity.class);
+                startActivity(it);
+            }
+        });
+
+
+        addPr = (Button) findViewById(R.id.btnovopr);
+        addPr.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent it = new Intent(MenuActivity.this, AddPrActivity.class);
                 startActivity(it);
             }
         });

@@ -1,4 +1,4 @@
-package com.example.profalexandre.fatecmobile.dbs;
+package com.sourcecodeplataform.dbs;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -18,10 +18,10 @@ public class BancoHelper extends SQLiteOpenHelper{
 
     public BancoHelper(Context context) {
         super(context, NOME_BANCO, null, VERSAO_SCHEMA);
-        // adc constraints de chave estrangeira
-        this.S_CREATE_U = "create table usuarios (id BIGINT NOT NULL AUTO_INCREMENT, name VARCHAR(255) NOT NULL, email VARCHAR(100) NOT NULL UNIQUE, password VARCHAR(255) NOT NULL, type VARCHAR(20) DEFAULT ''normal', primary key (id));";
-        this.S_CREATE_P = "create table projetos (id BIGINT NOT NULL AUTO_INCREMENT, name VARCHAR(255) NOT NULL, description VARCHAR(255) NOT NULL, filepath VARCHAR(255) UNIQUE, scmType VARCHAR(20) DEFAULT 'git', primary key (id));";
-        this.S_CREATE_UP = "create table usuarios_projetos (id BIGINT NOT NULL AUTO_INCREMENT, idUsuario BIGINT NOT NULL, idProjeto BIGINT NOT NULL, isOwner BOOL DEFAULT false, primary key (id)"
+        // change from 'BIGINT NOT NULL AUTO_INCREMENT... PRIMARY KEY()' to 'INTEGER AUTOINCREMENT...' cuz sqlite is shit
+        this.S_CREATE_U = "create table usuarios (id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(255) NOT NULL, email VARCHAR(100) NOT NULL UNIQUE, password VARCHAR(255) NOT NULL, type VARCHAR(20) DEFAULT 'normal');";
+        this.S_CREATE_P = "create table projetos (id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(255) NOT NULL, description VARCHAR(255) NOT NULL, filepath VARCHAR(255) UNIQUE, scmType VARCHAR(20) DEFAULT 'git');";
+        this.S_CREATE_UP = "create table usuarios_projetos (id INTEGER PRIMARY KEY AUTOINCREMENT, idUsuario BIGINT NOT NULL, idProjeto BIGINT NOT NULL, isOwner BOOL DEFAULT false, "
                 + "foreign key (idUsuario) references usuarios(id), foreign key (idProjeto) references projetos(id));";
     }
 

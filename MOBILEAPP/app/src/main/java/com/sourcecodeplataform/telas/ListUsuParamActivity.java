@@ -1,4 +1,4 @@
-package com.example.profalexandre.fatecmobile.telas;
+package com.sourcecodeplataform.telas;
 
 import android.content.Intent;
 import android.content.Context;
@@ -12,9 +12,9 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.profalexandre.fatecmobile.R;
-import com.example.profalexandre.fatecmobile.dbs.UsuarioController;
-import com.example.profalexandre.fatecmobile.modelos.Usuario;
+import com.sourcecodeplataform.R;
+import com.sourcecodeplataform.dbs.UsuarioController;
+import com.sourcecodeplataform.modelos.Usuario;
 
 import java.util.List;
 
