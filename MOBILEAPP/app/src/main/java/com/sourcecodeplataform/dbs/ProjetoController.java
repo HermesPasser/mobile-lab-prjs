@@ -23,15 +23,12 @@ public class ProjetoController {
 
     public String inserir(Projeto pr) {
         db = dbHelper.getWritableDatabase();
-        ContentValues valores;
-        long resultado;
-        String retorno;
-        valores = new ContentValues();
+        ContentValues valores = new ContentValues();
         valores.put("NAME", pr.getName());
         valores.put("DESCRIPTION", pr.getDescription());
-        valores.put("ARCHIVEFILENAME", pr.getArchiveFilename());
+        valores.put("FILEPATH", pr.getArchiveFilename());
         valores.put("SCMTYPE", pr.getScmType());
-        resultado = db.insert(BancoHelper.TABELA_P, null, valores);
+        long resultado = db.insert(BancoHelper.TABELA_P, null, valores);
         db.close();
         return resultado == -1 ? "Erro ao inserir registro" : "Registro Inserido com sucesso";
     }
@@ -46,12 +43,11 @@ public class ProjetoController {
 
     public String alterar(Projeto pr) {
         db = dbHelper.getWritableDatabase();
-        ContentValues valores;
         String where = "ID = " + pr.getId();
-        valores = new ContentValues();
+        ContentValues valores = new ContentValues();
         valores.put("NAME", pr.getName());
         valores.put("DESCRIPTION", pr.getDescription());
-        valores.put("ARCHIVEFILENAME", pr.getArchiveFilename());
+        valores.put("FILEPATH", pr.getArchiveFilename());
         valores.put("SCMTYPE", pr.getScmType());
         db.update(BancoHelper.TABELA_P, valores,where,null);
         db.close();

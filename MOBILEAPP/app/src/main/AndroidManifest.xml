@@ -18,13 +18,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".telas.AddUsuActivity"
-            android:label="@string/title_activity_add_usu"
-            android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".telas.MenuActivity"
             android:label="@string/title_activity_menu"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".telas.AddUsuActivity"
+            android:label="@string/title_activity_add_usu"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".telas.ListUsuActivity"
@@ -37,12 +39,42 @@
         <activity
             android:name=".telas.ListUsuParamActivity"
             android:label="@string/title_activity_list_usu_param"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
             android:name=".telas.AddPrActivity"
             android:label="@string/title_activity_add_pr"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".telas.ListPrActivity"
+            android:label="@string/title_activity_list_pr"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".telas.ListPrParamActivity"
+            android:label="@string/title_activity_list_pr_param"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".telas.UptPrActivity"
+            android:label="@string/title_activity_upt_pr"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".telas.AddUsuPrActivity"
+            android:label="@string/title_activity_add_usupr"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".telas.ListUsuPrActivity"
+            android:label="@string/title_activity_list_usupr"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".telas.ListUsuPrParamActivity"
+            android:label="@string/title_activity_list_usupr_param"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".telas.UptUsuPrActivity"
+            android:label="@string/title_activity_upt_usupr"
+            android:theme="@style/AppTheme.NoActionBar" />
+
     </application>
 
 </manifest>

@@ -48,22 +48,23 @@ public class ListUsuParamActivity extends AppCompatActivity implements AdapterVi
         });
     }
 
-    @Override
-    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-        // position é a posição do item no adapter
+    private int click(AdapterView<?> parent, View view, int position, long id) {
         Usuario usu = (Usuario) parent.getItemAtPosition(position);
         Intent it = new Intent(ListUsuParamActivity.this, UptUsuActivity.class);
         it.putExtra("Usuario", usu);
         startActivity(it);
-        Toast.makeText(getApplicationContext(),"Item Pressionado :-" + position + " ID= " + usu.getId(), Toast.LENGTH_LONG).show();
+        return usu.getId();
+    }
+
+    @Override
+    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+        id = click(parent, view, position, id);
+        Toast.makeText(getApplicationContext(),"Item Pressionado :-" + position + " ID= " + id, Toast.LENGTH_LONG).show();
         return true;
     }
 
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Usuario usu = (Usuario) parent.getItemAtPosition(position);
-        Intent it = new Intent(ListUsuParamActivity.this, UptUsuActivity.class);
-        it.putExtra("Usuario", usu);
-        startActivity(it);
-        Toast.makeText(getApplicationContext(),"Item Click :-" + position + " ID= " + usu.getId(), Toast.LENGTH_LONG).show();
+        id = click(parent, view, position, id);
+        Toast.makeText(getApplicationContext(),"Item Click :-" + position + " ID= " + id, Toast.LENGTH_LONG).show();
     }
 }

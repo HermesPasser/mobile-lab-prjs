@@ -36,7 +36,6 @@ public class LoginActivity extends AppCompatActivity {
         email = (EditText) findViewById(R.id.email);
         password = (EditText) findViewById(R.id.password);
 
-
         addUsu = (Button) findViewById(R.id.btnovousu);
         addUsu.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

@@ -23,15 +23,12 @@ public class UsuarioController {
 
     public String inserir(Usuario usu) {
         db = dbHelper.getWritableDatabase();
-        ContentValues valores;
-        long resultado;
-        String retorno;
-        valores = new ContentValues();
+        ContentValues valores = new ContentValues();
         valores.put("NAME", usu.getName());
         valores.put("EMAIL", usu.getEmail());
         valores.put("PASSWORD", usu.getPassword());
         valores.put("TYPE", usu.getType());
-        resultado = db.insert(BancoHelper.TABELA_U, null, valores);
+        long resultado = db.insert(BancoHelper.TABELA_U, null, valores);
         db.close();
         return resultado == -1 ? "Erro ao inserir registro" : "Registro Inserido com sucesso";
     }
@@ -46,10 +43,9 @@ public class UsuarioController {
 
     public String alterar(Usuario usu) {
         db = dbHelper.getWritableDatabase();
-        ContentValues valores;
         String retorno = "Registro Alterado com sucesso";
         String where = "ID = " + usu.getId();
-        valores = new ContentValues();
+        ContentValues valores = new ContentValues();
         valores.put("NAME", usu.getName());
         valores.put("EMAIL", usu.getEmail());
         valores.put("PASSWORD", usu.getPassword());

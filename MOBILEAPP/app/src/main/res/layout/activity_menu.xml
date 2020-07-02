@@ -30,10 +30,50 @@
         android:layout_height = "wrap_content"
         android:text = "@string/btnovousu" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="@android:color/darker_gray"/>
+
+    <Button
+        android:id="@+id/btlistpr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btlistarTodosPr" />
+
+    <Button
+        android:id="@+id/btlistprParam"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btlistarParamPr" />
+
     <Button
         android:id = "@+id/btnovopr"
         android:layout_width = "match_parent"
         android:layout_height = "wrap_content"
         android:text = "@string/btnovopr" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="@android:color/darker_gray"/>
+
+    <Button
+        android:id="@+id/btlistusupr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btlistarTodosUsuPr" />
+
+    <Button
+        android:id="@+id/btlistusuprParam"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btlistarParamUsuPr" />
+
+    <Button
+        android:id = "@+id/btnovousupr"
+        android:layout_width = "match_parent"
+        android:layout_height = "wrap_content"
+        android:text = "@string/btnovousupr" />
 
 </LinearLayout>

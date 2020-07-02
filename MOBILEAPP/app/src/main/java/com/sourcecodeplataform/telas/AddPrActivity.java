@@ -8,35 +8,35 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.sourcecodeplataform.R;
-import com.sourcecodeplataform.dbs.UsuarioController;
-import com.sourcecodeplataform.modelos.Usuario;
+import com.sourcecodeplataform.dbs.ProjetoController;
+import com.sourcecodeplataform.modelos.Projeto;
 
 public class AddPrActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_usu);
-        final UsuarioController ge = new UsuarioController(getBaseContext());
+        setContentView(R.layout.activity_add_pr);
+        final ProjetoController ge = new ProjetoController(getBaseContext());
         Button Inserir = (Button) findViewById(R.id.btinserir);
 
         Inserir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 EditText name  = (EditText) findViewById(R.id.name);
-                EditText email = (EditText) findViewById((R.id.email));
-                EditText passw = (EditText) findViewById(R.id.password);
-                EditText type = (EditText) findViewById(R.id.type);
+                EditText desc = (EditText) findViewById((R.id.desc));
+                EditText filename = (EditText) findViewById(R.id.filename);
+                EditText scm = (EditText) findViewById(R.id.scm);
 
-                Usuario usu = new Usuario(
+                Projeto pr = new Projeto(
                         0,
                         name.getText().toString(),
-                        email.getText().toString(),
-                        passw.getText().toString(),
-                        type.getText().toString()
+                        desc.getText().toString(),
+                        filename.getText().toString(),
+                        scm.getText().toString()
                  );
 
-                String msg = ge.inserir(usu);
+                String msg = ge.inserir(pr);
                 Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
             }
         });
