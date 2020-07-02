@@ -26,7 +26,7 @@ public class MenuActivity extends AppCompatActivity {
 
         listUsu = (Button) findViewById(R.id.btlistusu);
         listUsuPar = (Button) findViewById(R.id.btlistusuParam);
-        addUsu = (Button) findViewById(R.id.btnovousupr);
+        addUsu = (Button) findViewById(R.id.btnovousu);
 
         listPr = (Button) findViewById(R.id.btlistpr);
         listPrPar = (Button) findViewById(R.id.btlistprParam);
@@ -37,9 +37,9 @@ public class MenuActivity extends AppCompatActivity {
         addUsuPr = (Button) findViewById(R.id.btnovousupr);
 
         if (!usuLogado.getType().equals("ADM")) {
-            addUsu.setVisibility(View.INVISIBLE);
-            addPr.setVisibility(View.INVISIBLE);
-            addUsuPr.setVisibility(View.INVISIBLE);
+            addUsu.setVisibility(View.GONE);
+            addPr.setVisibility(View.GONE);
+            addUsuPr.setVisibility(View.GONE);
         }
 
         listUsu.setOnClickListener(new View.OnClickListener() {
